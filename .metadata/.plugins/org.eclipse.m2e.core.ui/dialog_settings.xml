@@ -2,7 +2,11 @@
 <section name="Workbench">
 	<section name="MavenProjectImportWizardPage">
 		<list key="rootDirectory">
+<<<<<<< HEAD
 			<item value="C:\Users\Rubens\OneDrive\Área de Trabalho\Vai-Tranquilis"/>
+=======
+			<item value="C:\Users\igorn\OneDrive\Desktop\Vai-Tranquilis"/>
+>>>>>>> 7d1697084b971c40d3812fbe7d94d8feeb1419aa
 		</list>
 		<list key="projectNameTemplate">
 			<item value="[artifactId]"/>
