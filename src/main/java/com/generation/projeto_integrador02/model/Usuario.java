@@ -29,6 +29,6 @@ public class Usuario {
 	private String foto;
 	
 	@NotBlank
-	@Size(max = 50, message = "O atributo eenha deve conter no máximo 50 caracteres")
+	@Size(max = 50, message = "O atributo senha deve conter no máximo 50 caracteres")
 	private String senha;
 }

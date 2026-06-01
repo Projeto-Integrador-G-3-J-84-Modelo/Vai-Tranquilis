@@ -10,27 +10,22 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 @Entity
-@Table(name = "tb_seguroVida")
-public class SeguroVida {
+@Table(name = "tb_planoSeguro")
+public class PlanoSeguro {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
 	@NotBlank
-	@Size(max = 120, message = "O atributo nome do seguro deve conter no máximo 120 caracteres")
-	private String nomeSegurado;
-	
-	@NotNull
-	private Byte idade;
-
-	@NotNull
-	private Integer valorCobertura;
-	
-	@NotNull
-	private Integer valorMensalidade;
+	@Size(max = 50, message = "O atributo nome do plano deve conter no máximo 50 caracteres")
+	private String nomePlano;
 	
 	@NotBlank
-	@Size(max = 50, message = "O atributo senha deve conter no máximo 50 caracteres")
-	private String senha;
-
+	@Size(max = 200, message = "O atributo descrição deve conter no máximo 200 caracteres")
+	private String descricao;
+	
+	@NotNull
+	private Double coberturaMaxima;
+	
+	
 }
