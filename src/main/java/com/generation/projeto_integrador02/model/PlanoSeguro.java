@@ -15,7 +15,7 @@ public class PlanoSeguro {
 
     @Id // Diz que esse atributo é a Chave Primária
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Gerar o ID automaticamente 
-    private Long idPlano;
+    private Long id;
 
     @NotBlank(message = "O nome do plano não pode ficar em branco") // Impedir que salvem um plano sem nome
     private String nomePlano;
@@ -24,15 +24,14 @@ public class PlanoSeguro {
     private String descricao;
 
     @NotNull(message = "A cobertura máxima não pode ser nula")
-    private BigDecimal coberturaMaxima; //BigDecimal para lidar com dinheiro/valores exatos
+    private Double coberturaMaxima; //BigDecimal para lidar com dinheiro/valores exatos
 
-   
-    public Long getIdPlano() {
-        return idPlano;
+  public Long getId() {
+        return id;
     }
 
-    public void setIdPlano(Long idPlano) {
-        this.idPlano = idPlano;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getNomePlano() {
@@ -51,11 +50,11 @@ public class PlanoSeguro {
         this.descricao = descricao;
     }
 
-    public BigDecimal getCoberturaMaxima() {
+    public Double getCoberturaMaxima() {
         return coberturaMaxima;
     }
 
-    public void setCoberturaMaxima(BigDecimal coberturaMaxima) {
+    public void setCoberturaMaxima(Double coberturaMaxima) {
         this.coberturaMaxima = coberturaMaxima;
     }
 }
