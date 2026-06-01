@@ -83,4 +83,13 @@ public class Usuario {
 		this.senha = senha;
 	}
 
+	public List<SeguroVida> getSeguro() {
+		return seguro;
+	}
+
+	public void setSeguro(List<SeguroVida> seguro) {
+		this.seguro = seguro;
+	}
+
+	
 }
