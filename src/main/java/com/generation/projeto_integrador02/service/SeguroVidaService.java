@@ -2,10 +2,12 @@ package com.generation.projeto_integrador02.service;
 
 import java.util.List;
 import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
+
 import com.generation.projeto_integrador02.model.SeguroVida;
 import com.generation.projeto_integrador02.repository.SeguroVidaRepository;
 
@@ -42,14 +44,4 @@ public class SeguroVidaService {
         }
     }
 
-    public String verificarElegibilidade(Long id) {
-        SeguroVida seguro = seguroVidaRepository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Seguro não encontrado!"));
-
-        if (seguro.getIdade() < 18) {
-            return "Não elegível para este tipo de seguro.";
-        }
-        
-        return "Elegível para o seguro de vida.";
-    }
 }

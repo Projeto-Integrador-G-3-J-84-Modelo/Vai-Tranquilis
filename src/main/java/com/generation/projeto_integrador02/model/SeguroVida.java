@@ -6,7 +6,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -22,9 +22,6 @@ public class SeguroVida {
 	@NotBlank
 	@Size(max = 120, message = "O atributo nome do seguro deve conter no máximo 120 caracteres")
 	private String nomeSegurado;
-
-	@NotNull
-	private Byte idade;
 
 	@NotNull
 	private Integer valorCobertura;
@@ -56,14 +53,6 @@ public class SeguroVida {
 
 	public void setNomeSegurado(String nomeSegurado) {
 		this.nomeSegurado = nomeSegurado;
-	}
-
-	public Byte getIdade() {
-		return idade;
-	}
-
-	public void setIdade(Byte idade) {
-		this.idade = idade;
 	}
 
 	public Integer getValorCobertura() {

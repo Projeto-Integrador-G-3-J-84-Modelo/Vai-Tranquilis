@@ -83,15 +83,6 @@ public class Usuario {
 		this.idade = idade;
 	}
 
-<<<<<<< HEAD
-    public List<SeguroVida> getSeguro() {
-        return seguro;
-    }
-
-    public void setSeguro(List<SeguroVida> seguro) {
-        this.seguro = seguro;
-    }
-=======
 	public List<SeguroVida> getSeguroVida() {
 		return seguroVida;
 	}
@@ -100,6 +91,5 @@ public class Usuario {
 		this.seguroVida = seguroVida;
 	}
 
->>>>>>> f3db01923e2b6274e88ace75af45da12a6e78007
 
 }

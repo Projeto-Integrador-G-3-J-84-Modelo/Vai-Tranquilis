@@ -1,14 +1,16 @@
 package com.generation.projeto_integrador02.model;
 
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-<<<<<<< HEAD
-import jakarta.persistence.ManyToOne;
-=======
 import jakarta.persistence.OneToMany;
->>>>>>> f3db01923e2b6274e88ace75af45da12a6e78007
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -32,7 +34,6 @@ public class PlanoSeguro {
 	@NotNull
 	private Double coberturaMaxima;
 	
-	// relacionamento entre as entidades seguroVida e planoSeguro
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "planoSeguro", cascade = CascadeType.REMOVE)
 	@JsonIgnoreProperties(value = "planoSeguro", allowSetters = true)
 	private List<SeguroVida> seguroVida;
@@ -69,16 +70,6 @@ public class PlanoSeguro {
 		this.coberturaMaxima = coberturaMaxima;
 	}
 
-<<<<<<< HEAD
-    public PlanoSeguro getPlano() {
-        return plano;
-    }
-
-    public void setPlano(PlanoSeguro plano) {
-        this.plano = plano;
-    }
-
-=======
 	public List<SeguroVida> getSeguroVida() {
 		return seguroVida;
 	}
@@ -86,6 +77,5 @@ public class PlanoSeguro {
 	public void setSeguroVida(List<SeguroVida> seguroVida) {
 		this.seguroVida = seguroVida;
 	}
->>>>>>> f3db01923e2b6274e88ace75af45da12a6e78007
 
 }

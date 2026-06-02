@@ -1,6 +1,6 @@
 package com.generation.projeto_integrador02.controller;
 
-import java.util.Collections;
+
 import java.util.List;
 import java.util.Map;
 
@@ -59,11 +59,4 @@ public class SeguroVidaController {
         seguroVidaService.deletar(id);
     }
 
-    // ENDPOINT
-    @GetMapping("/elegibilidade/{id}")
-    public ResponseEntity<Map<String, String>> checarElegibilidade(@PathVariable Long id) {
-        String mensagem = seguroVidaService.verificarElegibilidade(id);
-        
-        return ResponseEntity.ok(Collections.singletonMap("mensagem", mensagem));
-    }
 }
