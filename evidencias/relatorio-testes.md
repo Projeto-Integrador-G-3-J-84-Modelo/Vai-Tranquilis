@@ -241,7 +241,7 @@ Lista de seguros retornada com sucesso contendo os registros cadastrados.
 
 ### Evidência
 
-![CT008](seguro-vida/seguro-get-all.png)
+![CT008](seguro-vida/seguro-gete-all.png)
 
 ### Status
 
