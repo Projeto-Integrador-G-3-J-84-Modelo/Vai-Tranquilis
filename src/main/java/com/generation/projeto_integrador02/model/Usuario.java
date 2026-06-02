@@ -34,14 +34,13 @@ public class Usuario {
 	// atributo foto
 	@Size(max = 255, message = "O atributo foto deve conter no máximo 255 caracteres")
 	private String foto;
-
+	
 	@NotNull
-	@Size(max = 50, message = "O atributo senha deve conter no máximo 50 caracteres")
-	private String senha;
+	private Integer idade; 
 
-	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JsonIgnoreProperties("usuario")
-	private List<SeguroVida> seguro;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario", cascade = CascadeType.ALL)
+	@JsonIgnoreProperties(value = "usuario", allowSetters = true)
+	private List<SeguroVida> seguroVida;
 	
 	// Getters e SEtters
 	public Long getId() {
@@ -76,20 +75,21 @@ public class Usuario {
 		this.foto = foto;
 	}
 
-	public String getSenha() {
-		return senha;
+	public Integer getIdade() {
+		return idade;
 	}
 
-	public void setSenha(String senha) {
-		this.senha = senha;
+	public void setIdade(Integer idade) {
+		this.idade = idade;
 	}
 
-	public List<SeguroVida> getSeguro() {
-		return seguro;
+	public List<SeguroVida> getSeguroVida() {
+		return seguroVida;
 	}
 
-	public void setSeguro(List<SeguroVida> seguro) {
-		this.seguro = seguro;
+	public void setSeguroVida(List<SeguroVida> seguroVida) {
+		this.seguroVida = seguroVida;
 	}
+
 
 }

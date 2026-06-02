@@ -18,25 +18,30 @@ public class SeguroVida {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	@NotBlank
 	@Size(max = 120, message = "O atributo nome do seguro deve conter no máximo 120 caracteres")
 	private String nomeSegurado;
-	
+
 	@NotNull
 	private Byte idade;
 
 	@NotNull
 	private Integer valorCobertura;
-	
+
 	@NotNull
 	private Integer valorMensalidade;
-	
-	
+
+	// relacionamento entre as entidades seguroVida e planoSeguro
 	@ManyToOne
-	@JsonIgnoreProperties("seguro") 
-    private Usuario usuario;
+	@JsonIgnoreProperties("seguroVida")
+	private PlanoSeguro planoSeguro;
 	
+	//relacionamento entidades seguroVida e usuario
+	@ManyToOne
+	@JsonIgnoreProperties("seguroVida")
+	private Usuario usuario;
+
 	public Long getId() {
 		return id;
 	}
@@ -77,6 +82,13 @@ public class SeguroVida {
 		this.valorMensalidade = valorMensalidade;
 	}
 
+	public PlanoSeguro getPlanoSeguro() {
+		return planoSeguro;
+	}
+
+	public void setPlanoSeguro(PlanoSeguro planoSeguro) {
+		this.planoSeguro = planoSeguro;
+	}
 
 	public Usuario getUsuario() {
 		return usuario;
@@ -85,5 +97,5 @@ public class SeguroVida {
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
-	
+
 }

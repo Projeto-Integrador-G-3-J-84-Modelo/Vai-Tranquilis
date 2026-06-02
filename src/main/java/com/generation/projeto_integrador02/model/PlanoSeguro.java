@@ -10,7 +10,6 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
@@ -23,20 +22,22 @@ public class PlanoSeguro {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	@NotBlank
 	@Size(max = 50, message = "O atributo nome do plano deve conter no máximo 50 caracteres")
 	private String nomePlano;
-	
+
 	@NotBlank
 	@Size(max = 200, message = "O atributo descrição deve conter no máximo 200 caracteres")
 	private String descricao;
-	
+
 	@NotNull
 	private Double coberturaMaxima;
 	
-	@ManyToOne
-	private PlanoSeguro plano;
+	// relacionamento entre as entidades seguroVida e planoSeguro
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "planoSeguro", cascade = CascadeType.REMOVE)
+	@JsonIgnoreProperties(value = "planoSeguro", allowSetters = true)
+	private List<SeguroVida> seguroVida;
 	
 	public Long getId() {
 		return id;
@@ -70,5 +71,12 @@ public class PlanoSeguro {
 		this.coberturaMaxima = coberturaMaxima;
 	}
 
+	public List<SeguroVida> getSeguroVida() {
+		return seguroVida;
+	}
+
+	public void setSeguroVida(List<SeguroVida> seguroVida) {
+		this.seguroVida = seguroVida;
+	}
 
 }
