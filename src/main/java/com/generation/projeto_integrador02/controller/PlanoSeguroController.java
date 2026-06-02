@@ -44,7 +44,7 @@ public class PlanoSeguroController {
     }
 
     // 5. PUT /planos (Atualiza um plano existente)
-    @PutMapping
+    @PutMapping("/{id}")
     public ResponseEntity<PlanoSeguro> atualizar(@Valid @RequestBody PlanoSeguro planoSeguro) {
         // Verifica se o ID foi passado e se o plano existe antes de atualizar
         if (planoSeguro.getId() == null || planoSeguroService.buscarPorId(planoSeguro.getId()).isEmpty()) {
