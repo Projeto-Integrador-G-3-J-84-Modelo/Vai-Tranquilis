@@ -1,14 +1,15 @@
 package com.generation.projeto_integrador02.service; 
 
-import com.generation.projeto_integrador02.model.PlanoSeguro;
-import com.generation.projeto_integrador02.repository.PlanoSeguroRepository;
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.List;
-import java.util.Optional;
+import com.generation.projeto_integrador02.model.PlanoSeguro;
+import com.generation.projeto_integrador02.repository.PlanoSeguroRepository;
 
 @Service 
 public class PlanoSeguroService {
@@ -35,12 +36,10 @@ public class PlanoSeguroService {
         if(planoSeguroRepository.existsById(id)) {
             planoSeguroRepository.deleteById(id);
         } else {
-            // Se não existir, emite o erro 404 (Not Found).
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Plano de Seguro não encontrado!");
         }
     }
 
-    // 5. Busca Customizada.
     public List<PlanoSeguro> buscarPorDescricao(String descricao) {
         return planoSeguroRepository.findAllByDescricaoContainingIgnoreCase(descricao);
     }

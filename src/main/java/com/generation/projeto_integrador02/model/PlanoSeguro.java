@@ -1,17 +1,10 @@
 package com.generation.projeto_integrador02.model;
 
-import java.util.List;
-
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -36,6 +29,7 @@ public class PlanoSeguro {
 	private Double coberturaMaxima;
 	
 	@ManyToOne
+	@NotNull(message = "O plano de seguro deve estar associado a um seguro de vida.")
 	private PlanoSeguro plano;
 	
 	public Long getId() {
@@ -69,6 +63,14 @@ public class PlanoSeguro {
 	public void setCoberturaMaxima(Double coberturaMaxima) {
 		this.coberturaMaxima = coberturaMaxima;
 	}
+
+    public PlanoSeguro getPlano() {
+        return plano;
+    }
+
+    public void setPlano(PlanoSeguro plano) {
+        this.plano = plano;
+    }
 
 
 }

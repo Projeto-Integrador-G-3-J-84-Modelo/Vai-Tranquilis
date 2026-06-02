@@ -6,7 +6,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -36,9 +36,9 @@ public class SeguroVida {
 	@Size(max = 50, message = "O atributo senha deve conter no máximo 50 caracteres")
 	private String senha;
 	
-	@ManyToOne
+	@OneToMany
 	@JsonIgnoreProperties("seguro") 
-    private Usuario usuario;
+	private Usuario usuario;
 	
 	public Long getId() {
 		return id;

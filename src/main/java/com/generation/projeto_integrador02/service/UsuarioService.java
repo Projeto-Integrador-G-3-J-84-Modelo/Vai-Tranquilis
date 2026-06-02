@@ -1,6 +1,5 @@
 package com.generation.projeto_integrador02.service;
 
-//all imports
 import java.util.List;
 import java.util.Optional;
 
@@ -26,10 +25,10 @@ public class UsuarioService {
     }
 
     public Usuario createUsuario(Usuario usuario) {
-        usuario.setId(null); // Garantir que o ID seja nulo para criar um novo registro
-        usuario.setSenha(usuario.getSenha()); // Aqui você pode adicionar lógica para criptografar a senha, se desejar
-        usuario.setFoto(usuario.getFoto()); // Garantir que a foto seja definida, se fornecida
-        usuario.setNome(usuario.getNome()); // Garantir que o nome seja definido, se fornecido
+        usuario.setId(null); 
+        usuario.setSenha(usuario.getSenha());
+        usuario.setFoto(usuario.getFoto()); 
+        usuario.setNome(usuario.getNome()); 
         return usuarioRepository.save(usuario);
     }
 
