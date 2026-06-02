@@ -70,4 +70,8 @@ public class PlanoSeguro {
 		this.coberturaMaxima = coberturaMaxima;
 	}
 
+<<<<<<< HEAD
+=======
+	
+>>>>>>> feature/tests
 }
