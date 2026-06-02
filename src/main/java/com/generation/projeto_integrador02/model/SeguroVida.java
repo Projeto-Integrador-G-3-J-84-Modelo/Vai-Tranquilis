@@ -24,9 +24,6 @@ public class SeguroVida {
 	private String nomeSegurado;
 
 	@NotNull
-	private Byte idade;
-
-	@NotNull
 	private Integer valorCobertura;
 
 	@NotNull
@@ -56,16 +53,9 @@ public class SeguroVida {
 
 	public void setNomeSegurado(String nomeSegurado) {
 		this.nomeSegurado = nomeSegurado;
+	
 	}
-
-	public Byte getIdade() {
-		return idade;
-	}
-
-	public void setIdade(Byte idade) {
-		this.idade = idade;
-	}
-
+	
 	public Integer getValorCobertura() {
 		return valorCobertura;
 	}
