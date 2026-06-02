@@ -32,9 +32,6 @@ public class SeguroVida {
 	@NotNull
 	private Integer valorMensalidade;
 	
-	@NotBlank
-	@Size(max = 50, message = "O atributo senha deve conter no máximo 50 caracteres")
-	private String senha;
 	
 	@ManyToOne
 	@JsonIgnoreProperties("seguro") 
@@ -80,13 +77,6 @@ public class SeguroVida {
 		this.valorMensalidade = valorMensalidade;
 	}
 
-	public String getSenha() {
-		return senha;
-	}
-
-	public void setSenha(String senha) {
-		this.senha = senha;
-	}
 
 	public Usuario getUsuario() {
 		return usuario;

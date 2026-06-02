@@ -1,5 +1,7 @@
 package com.generation.projeto_integrador02.model;
 
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.CascadeType;
@@ -16,7 +18,6 @@ import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "tb_usuario")
-
 public class Usuario {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,8 +41,8 @@ public class Usuario {
 
 	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JsonIgnoreProperties("usuario")
+	private List<SeguroVida> seguro;
 	
-
 	// Getters e SEtters
 	public Long getId() {
 		return id;
@@ -81,6 +82,14 @@ public class Usuario {
 
 	public void setSenha(String senha) {
 		this.senha = senha;
+	}
+
+	public List<SeguroVida> getSeguro() {
+		return seguro;
+	}
+
+	public void setSeguro(List<SeguroVida> seguro) {
+		this.seguro = seguro;
 	}
 
 }
