@@ -53,7 +53,6 @@ public class SeguroVidaService {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Seguro de Vida não encontrado!");
         }
     }
-
     public String verificarElegibilidade(Long id) {
         SeguroVida seguro = seguroVidaRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Seguro de vida não encontrado!"));
@@ -69,5 +68,6 @@ public class SeguroVidaService {
         }
         
         return "Elegível para o seguro de vida.";
+
     }
 }

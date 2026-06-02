@@ -55,7 +55,6 @@ public class SeguroVida {
 		this.nomeSegurado = nomeSegurado;
 	
 	}
-	
 	public Integer getValorCobertura() {
 		return valorCobertura;
 	}
