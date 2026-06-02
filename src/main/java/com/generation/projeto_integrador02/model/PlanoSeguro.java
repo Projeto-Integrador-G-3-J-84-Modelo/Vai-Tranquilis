@@ -10,6 +10,7 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
@@ -34,9 +35,8 @@ public class PlanoSeguro {
 	@NotNull
 	private Double coberturaMaxima;
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "plano", cascade = CascadeType.REMOVE)
-    @JsonIgnoreProperties(value = "plano", allowSetters = true)
-    private List<PlanoSeguro> plano;
+	@ManyToOne
+	private PlanoSeguro plano;
 	
 	public Long getId() {
 		return id;

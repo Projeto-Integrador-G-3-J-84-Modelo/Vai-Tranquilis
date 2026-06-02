@@ -39,9 +39,6 @@ public class Usuario {
 	@Size(max = 50, message = "O atributo senha deve conter no máximo 50 caracteres")
 	private String senha;
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario", cascade = CascadeType.REMOVE)
-	@JsonIgnoreProperties(value = "usuario", allowSetters = true)
-	private List<SeguroVida> seguro;
 
 	public Long getId() {
 		return id;
@@ -83,13 +80,4 @@ public class Usuario {
 		this.senha = senha;
 	}
 
-	public List<SeguroVida> getSeguro() {
-		return seguro;
-	}
-
-	public void setSeguro(List<SeguroVida> seguro) {
-		this.seguro = seguro;
-	}
-
-	
 }
