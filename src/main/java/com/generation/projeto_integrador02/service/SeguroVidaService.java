@@ -17,31 +17,59 @@ public class SeguroVidaService {
     @Autowired
     private SeguroVidaRepository seguroVidaRepository;
 
+    
+    //* lista todos
     public List<SeguroVida> listarTodos() {
         return seguroVidaRepository.findAll();
     }
 
+    //* busca por um id 
+    
     public Optional<SeguroVida> buscarPorId(Long id) {
         return seguroVidaRepository.findById(id);
     }
 
-    public SeguroVida criar(SeguroVida seguro) {
-        return seguroVidaRepository.save(seguro);
+    //* cadastra um id 
+    
+    public SeguroVida criar(SeguroVida seguroVida) {
+        return seguroVidaRepository.save(seguroVida);
     }
 
-    public SeguroVida atualizar(SeguroVida seguro) {
-        if (seguroVidaRepository.existsById(seguro.getId())) {
-            return seguroVidaRepository.save(seguro);
+    //* atualiza um id
+    
+    public SeguroVida atualizar(SeguroVida seguroVida) {
+        if (seguroVidaRepository.existsById(seguroVida.getId())) {
+            return seguroVidaRepository.save(seguroVida);
         }
-        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Seguro de vida não encontrado!");
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Seguro de Vida não encontrado!");
     }
-
+    
+//* deleta um id
+    
     public void deletar(Long id) {
         if (seguroVidaRepository.existsById(id)) {
             seguroVidaRepository.deleteById(id);
         } else {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Seguro de vida não encontrado!");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Seguro de Vida não encontrado!");
         }
     }
 
+    public String verificarElegibilidade(Long id) {
+        SeguroVida seguro = seguroVidaRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Seguro de vida não encontrado!"));
+
+        if (seguro.getUsuario() == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Este seguro não possui um usuário vinculado para checar a idade!");
+        }
+
+        //* verifica a idade pelo usuario
+        
+        if (seguro.getUsuario().getIdade() < 18) {
+            return "Não elegível para este tipo de seguro.";
+        }
+        
+        return "Elegível para o seguro de vida.";
+
+    }
 }
+

@@ -53,6 +53,7 @@ public class SeguroVida {
 
 	public void setNomeSegurado(String nomeSegurado) {
 		this.nomeSegurado = nomeSegurado;
+	
 	}
 
 	public Integer getValorCobertura() {
