@@ -40,16 +40,6 @@ public class SeguroVidaService {
         } else {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Seguro de vida não encontrado!");
         }
-    }
-
-    public String verificarElegibilidade(Long id) {
-        SeguroVida seguro = seguroVidaRepository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Seguro não encontrado!"));
-
-        if (seguro.getIdade() < 18) {
-            return "Não elegível para este tipo de seguro.";
-        }
-        
-        return "Elegível para o seguro de vida.";
+    
     }
 }
