@@ -53,10 +53,9 @@ public class UsuarioController {
 	}
 
     @PostMapping("/cadastrar")
-    public ResponseEntity<Usuario> criar(@RequestBody Usuario usuario) {
-    		return usuarioService.criar(usuario)
-    				.map(resposta -> ResponseEntity.status(HttpStatus.CREATED).body(resposta))
-    				.orElse(ResponseEntity.status(HttpStatus.BAD_REQUEST).build());
+    public ResponseEntity<Usuario> criar(@Valid @RequestBody Usuario usuario) {
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(usuarioService.criar(usuario));
     }
 
     @PutMapping("/atualizar")

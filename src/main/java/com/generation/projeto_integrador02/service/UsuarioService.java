@@ -25,8 +25,19 @@ public class UsuarioService {
         return usuarioRepository.findById(id);
     }
 
-    public Optional<Usuario> criar(Usuario usuario) {
-		return Optional.of(usuarioRepository.save(usuario));
+    public Usuario criar(Usuario usuario) {
+
+        Optional<Usuario> usuarioExistente = usuarioRepository.findByEmail(usuario.getEmail());
+        
+
+        if (usuarioExistente.isPresent()) {
+            throw new ResponseStatusException(
+                HttpStatus.BAD_REQUEST, "O e-mail '" + usuario.getEmail() + "' já está em uso!"
+            );
+        }
+
+        // 3. Se estiver tudo certo, salva o usuário normalmente
+        return usuarioRepository.save(usuario);
 	}
 
 	public Optional<Usuario> atualizar(Usuario usuario) {
