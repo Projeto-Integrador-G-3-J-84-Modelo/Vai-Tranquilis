@@ -37,21 +37,22 @@ public class SeguroVidaService {
     }
     
     public SeguroVida criar(SeguroVida seguroVida) {
-            // 1. Busca o plano completo no banco para saber o valor da cobertura
+            // Busca o plano completo no banco para saber o valor da cobertura
             PlanoSeguro plano = planoRepository.findById(seguroVida.getPlanoSeguro().getId())
                     .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Plano não encontrado"));
             
-            // 2. Busca o usuário completo no banco de dados para popular os campos null
             Usuario usuario = usuarioRepository.findById(seguroVida.getUsuario().getId())
                     .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado"));
 
-            // 3. Aplica a regra de cálculo (Exemplo: 0.1% da cobertura máxima)
-            Double taxaMensal = 0.001; 
-            Double mensalidadeCalculada = plano.getIndenizacaoMaxima() * taxaMensal;
+            // DESAFIO: VALIDAÇÃO DE IDADE 
+            if (usuario.getIdade() != null && usuario.getIdade() < 18) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Não elegível para este tipo de seguro.");
+            }
 
-            // 4. Define o valor gerado dentro do objeto do contrato
-            seguroVida.setValorMensalidade(mensalidadeCalculada);
-            seguroVida.setPlanoSeguro(plano); // Garante a associação completa
+            // Configurações automáticas do contrato
+            seguroVida.setDataContratacao(LocalDate.now());
+            seguroVida.setValorMensalidade(plano.getIndenizacaoMaxima() * 0.001); // 0.1% de taxa
+            seguroVida.setPlanoSeguro(plano);
             seguroVida.setUsuario(usuario);
 
             // 5. Salva o contrato com o valor calculado automaticamente pelo sistema
