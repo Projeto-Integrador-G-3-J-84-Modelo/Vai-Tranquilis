@@ -30,11 +30,25 @@ public class PlanoSeguroService {
     }
     
     public PlanoSeguro atualizar(PlanoSeguro planoSeguro) {
-        if (planoSeguroRepository.existsById(planoSeguro.getId())) {
-            return planoSeguroRepository.save(planoSeguro);
+        if (!planoSeguroRepository.existsById(planoSeguro.getId())) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
-        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Plano de Seguro não encontrado!");
+        return planoSeguroRepository.save(planoSeguro);
     }
+    
+    public void apagar(Long id) {
+        if(planoSeguroRepository.existsById(id)) {
+            planoSeguroRepository.deleteById(id);
+        } else {
+            
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Plano de Seguro não encontrado!");
+        }
+    }
+    
+    public List<PlanoSeguro> buscarPorDescricao(String descricao) {
+        return planoSeguroRepository.findAllByDescricaoContainingIgnoreCase(descricao);
+    }
+    
 
 
 }
