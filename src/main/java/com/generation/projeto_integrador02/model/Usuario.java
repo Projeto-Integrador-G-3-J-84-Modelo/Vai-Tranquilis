@@ -2,22 +2,20 @@ package com.generation.projeto_integrador02.model;
 
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "tb_usuario")
-
 public class Usuario {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,15 +29,18 @@ public class Usuario {
 	@Size(max = 120, message = "O atributo e-mail deve conter no máximo 120 caracteres")
 	private String email;
 
-	@NotBlank
-	@Size(max = 100, message = "O atributo foto deve conter no máximo 100 caracteres")
+	@Size(max = 255, message = "O atributo foto deve conter no máximo 255 caracteres")
 	private String foto;
+	
+	@NotNull(message = "O atributo Cobertura Maxima é obrigatório.")
+	@Digits(integer = 18 , message = "O atributo Idade deve ser maior que 18 deve ser um valor positivo.", fraction = 0)
+	private Integer idade; 
+	
+	@OneToMany(mappedBy = "usuario", cascade = CascadeType.REMOVE)
+	private List<SeguroVida> seguros;
 
-	@NotBlank
-	@Size(max = 50, message = "O atributo senha deve conter no máximo 50 caracteres")
-	private String senha;
-
-
+	
+	// Getters e SEtters
 	public Long getId() {
 		return id;
 	}
@@ -72,12 +73,25 @@ public class Usuario {
 		this.foto = foto;
 	}
 
-	public String getSenha() {
-		return senha;
+	public Integer getIdade() {
+		return idade;
 	}
 
-	public void setSenha(String senha) {
-		this.senha = senha;
+	public void setIdade(Integer idade) {
+		this.idade = idade;
 	}
+
+
+	public List<SeguroVida> getSeguros() {
+		return seguros;
+
+	}
+
+	public void setSeguros(List<SeguroVida> seguros) {
+		this.seguros = seguros;
+	}
+
+	
+	
 
 }

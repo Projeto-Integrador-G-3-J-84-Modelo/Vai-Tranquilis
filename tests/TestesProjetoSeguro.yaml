@@ -1,0 +1,533 @@
+type: collection.insomnia.rest/5.0
+schema_version: "5.1"
+name: Seguro
+meta:
+  id: wrk_8426b51eea674968b7a51bf6d5539da5
+  created: 1780427957441
+  modified: 1780427957441
+  description: ""
+collection:
+  - name: Plano
+    meta:
+      id: fld_7b213486881e41da97cd5a7bdc412daf
+      created: 1780456611240
+      modified: 1780461020851
+      sortKey: -1780456611440
+      description: ""
+    children:
+      - url: http://localhost:8080/planos/cadastrar
+        name: Cadastrar Plano
+        meta:
+          id: req_6a5b60a631bf4153b954bbd79af35de8
+          created: 1780427963721
+          modified: 1780460951117
+          isPrivate: false
+          description: ""
+          sortKey: -1780456618440
+        method: POST
+        body:
+          mimeType: application/json
+          text: |
+            {
+              "nomePlano": "Plano Vida Master",
+              "descricao": "Cobertura nacional e assistência funeral.",
+              "indenizacaoMaxima": 80000.00
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/12.6.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/planos/1
+        name: Buscar Por ID
+        meta:
+          id: req_490ab3863c504a14a2c2b6ccdb36080e
+          created: 1780428063511
+          modified: 1780461801914
+          isPrivate: false
+          description: ""
+          sortKey: -1780456618365
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/12.6.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/planos
+        name: Listar Planos
+        meta:
+          id: req_e2408db0d0624f52aac4d7ccb2acb454
+          created: 1780428698075
+          modified: 1780459077647
+          isPrivate: false
+          description: ""
+          sortKey: -1780456618390
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/12.6.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/planos/atualizar
+        name: Atualizar Plano
+        meta:
+          id: req_0e4ebf5ad7e24068b843a8451f97996d
+          created: 1780428756141
+          modified: 1780464545122
+          isPrivate: false
+          description: ""
+          sortKey: -1780456618352.5
+        method: PUT
+        body:
+          mimeType: application/json
+          text: |
+            {
+            	"id": 1,
+              "nomePlano": "Plano Vida Master Blaster!",
+              "descricao": "Cobertura nacional e assistência funeral.",
+              "indenizacaoMaxima": 999999.99
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/12.6.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/planos/1
+        name: Apagar Plano
+        meta:
+          id: req_00349839eeec41df8b1a563d1dae7f80
+          created: 1780456562193
+          modified: 1780462661307
+          isPrivate: false
+          description: ""
+          sortKey: -1780456618340
+        method: DELETE
+        headers:
+          - name: User-Agent
+            value: insomnia/12.6.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: Seguro
+    meta:
+      id: fld_64620230f26f4b678527490ac81ef6af
+      created: 1780456651300
+      modified: 1780457094377
+      sortKey: -1780222355072
+      description: ""
+    children:
+      - url: http://localhost:8080/seguros/1
+        name: Apagar Seguro
+        meta:
+          id: req_1ac57f69c40649d6829c88a420db6f16
+          created: 1780456651300
+          modified: 1780465545910
+          isPrivate: false
+          description: ""
+          sortKey: -1780456618358.75
+        method: DELETE
+        headers:
+          - name: User-Agent
+            value: insomnia/12.6.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/seguros/1
+        name: Buscar Por ID
+        meta:
+          id: req_362f39098a5b4e3f9b6fdad1776bb5c1
+          created: 1780456651300
+          modified: 1780462580368
+          isPrivate: false
+          description: ""
+          sortKey: -1780456618365
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/12.6.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/seguros/atualizar
+        name: Atualizar Seguro
+        meta:
+          id: req_7bce8c9f4f2d4b7eafd95f05e02757ea
+          created: 1780456651300
+          modified: 1780464055627
+          isPrivate: false
+          description: ""
+          sortKey: -1780456618359.5312
+        method: PUT
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "id": 3,
+              "usuario": {
+                "id": 1
+              },
+              "planoSeguro": {
+                "id": 1
+              }
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/12.6.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/seguros/cadastrar
+        name: Cadastrar Seguro
+        meta:
+          id: req_9a3a4c81169e42118a55b72652777d0f
+          created: 1780456651300
+          modified: 1780465676601
+          isPrivate: false
+          description: ""
+          sortKey: -1780456618440
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "usuario": 
+            	{ 
+            		"id": 1 
+            	},
+              "planoSeguro": 
+            	{ "id": 1 
+            	}
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/12.6.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/seguros
+        name: Listar Seguros
+        meta:
+          id: req_a55ab631eb1e402482e355191078c19c
+          created: 1780456651300
+          modified: 1780462606004
+          isPrivate: false
+          description: ""
+          sortKey: -1780456618390
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/12.6.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/seguros/usuarios/maria
+        name: Buscar Por Nome do Usuario
+        meta:
+          id: req_93dbbbec00b74d88863d9481623cdc5c
+          created: 1780462438633
+          modified: 1780464674063
+          isPrivate: false
+          description: ""
+          sortKey: -1780456618361.875
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/12.6.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/seguros/planos/Master
+        name: Buscar Por Nome do Plano
+        meta:
+          id: req_36fb7ad0288444a882adc10f5277be08
+          created: 1780462453005
+          modified: 1780464713775
+          isPrivate: false
+          description: ""
+          sortKey: -1780456618360.3125
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/12.6.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: Usuario
+    meta:
+      id: fld_5cdb993162f147b6b42be76af76ed7ec
+      created: 1780456664175
+      modified: 1780457004977
+      sortKey: -1780456611340
+      description: ""
+    children:
+      - url: http://localhost:8080/usuarios/atualizar
+        name: Atualizar Usuário
+        meta:
+          id: req_02b04fdb0d954c4e99bbb75a0053fe84
+          created: 1780456664175
+          modified: 1780464117792
+          isPrivate: false
+          description: ""
+          sortKey: -1780456800307.5
+        method: PUT
+        body:
+          mimeType: application/json
+          text: |-
+            {
+                "id": 1,
+                "nome": "João Silva Atualizado!",
+                "email": "joao.silva@example.com",
+                "foto": "https://example.com/fotos/joao.jpg",
+            		"idade": 44
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/12.6.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/usuarios/1
+        name: Apagar Usurario
+        meta:
+          id: req_1e071914690f45adaf3aea3c9f312534
+          created: 1780456664175
+          modified: 1780465526520
+          isPrivate: false
+          description: ""
+          sortKey: -1780456800301.25
+        method: DELETE
+        headers:
+          - name: User-Agent
+            value: insomnia/12.6.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/usuarios/1
+        name: Buscar Por ID
+        meta:
+          id: req_4e8fd16d77e84781b1e8c816c807a015
+          created: 1780456664175
+          modified: 1780456942894
+          isPrivate: false
+          description: ""
+          sortKey: -1780456800320
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/12.6.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/usuarios/cadastrar
+        name: Cadastrar Usuário
+        meta:
+          id: req_c3fbe708487e4ea387efcfca8b9d48bc
+          created: 1780456664175
+          modified: 1780457271235
+          isPrivate: false
+          description: ""
+          sortKey: -1780456800395
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+                "nome": "Maria Oliveira",
+                "email": "maria.oliveira@example.com",
+                "foto": "https://example.com/fotos/maria.jpg",
+                "idade": "43"
+
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/12.6.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/usuarios
+        name: Listar Usuários
+        meta:
+          id: req_d94fa1344b98448c8db2e8678ba2400e
+          created: 1780456664175
+          modified: 1780463023718
+          isPrivate: false
+          description: ""
+          sortKey: -1780456800345
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/12.6.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/usuarios/email/maria
+        name: Buscar por Email
+        meta:
+          id: req_521da3b890c14850986bb400e56f529d
+          created: 1780456800295
+          modified: 1780457068246
+          isPrivate: false
+          description: ""
+          sortKey: -1780456800313.75
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/12.6.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_8f56a53127357e3faaea438527646abdb327a08b
+    created: 1780427957448
+    modified: 1780427957448
+environments:
+  name: Base Environment
+  meta:
+    id: env_8f56a53127357e3faaea438527646abdb327a08b
+    created: 1780427957446
+    modified: 1780427957446
+    isPrivate: false
