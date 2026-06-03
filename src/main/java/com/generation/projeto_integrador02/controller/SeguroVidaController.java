@@ -1,8 +1,7 @@
 package com.generation.projeto_integrador02.controller;
 
-
 import java.util.List;
-import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,8 +16,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.generation.projeto_integrador02.model.SeguroVida;
+import com.generation.projeto_integrador02.repository.SeguroVidaRepository;
 import com.generation.projeto_integrador02.service.SeguroVidaService;
 
 import jakarta.validation.Valid;
@@ -27,37 +28,58 @@ import jakarta.validation.Valid;
 @RequestMapping("/seguros")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class SeguroVidaController {
-
+	
+	
     @Autowired
-    private SeguroVidaService seguroVidaService;
+    private SeguroVidaRepository seguroRepository;
+    
+    @Autowired
+    private SeguroVidaService seguroService;
 
-    @GetMapping
-    public ResponseEntity<List<SeguroVida>> getAll() {
-        return ResponseEntity.ok(seguroVidaService.listarTodos());
+
+	@GetMapping
+    public ResponseEntity<List<SeguroVida>> listarTodos(){
+        return ResponseEntity.ok(seguroRepository.findAll());
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<SeguroVida> getById(@PathVariable Long id) {
-        return seguroVidaService.buscarPorId(id)
-                .map(resposta -> ResponseEntity.ok(resposta))
-                .orElse(ResponseEntity.notFound().build());
+	@GetMapping("/{id}")
+    public ResponseEntity<SeguroVida> buscarPorId(@PathVariable Long id){
+        return seguroRepository.findById(id)
+            .map(resposta -> ResponseEntity.ok(resposta))
+            .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
+	
+	@GetMapping("/usuarios/{nome}")
+	public ResponseEntity<List<SeguroVida>> buscarPorNomeUsuario(@PathVariable String nome) {
+	    return ResponseEntity.ok(seguroRepository.findAllByUsuarioNomeContainingIgnoreCase(nome));
+	}
 
-    @PostMapping
-    public ResponseEntity<SeguroVida> post(@Valid @RequestBody SeguroVida seguro) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(seguroVidaService.criar(seguro));
+	@GetMapping("/planos/{nome}")
+	public ResponseEntity<List<SeguroVida>> buscarPorNomePlano(@PathVariable String nome) {
+	    return ResponseEntity.ok(seguroRepository.findAllByPlanoSeguroNomePlanoContainingIgnoreCase(nome));
+	}
+	
+	@PostMapping("/cadastrar")
+    public ResponseEntity<SeguroVida> criar(@Valid @RequestBody SeguroVida seguroVida) {
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(seguroService.criar(seguroVida));
     }
-
-    @PutMapping
-    public ResponseEntity<SeguroVida> put(@Valid @RequestBody SeguroVida seguro) {
-        return ResponseEntity.ok(seguroVidaService.atualizar(seguro));
+	
+	
+    @PutMapping("/atualizar")
+    public ResponseEntity<SeguroVida> put(@Valid @RequestBody SeguroVida seguroVida) {
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(seguroService.atualizar(seguroVida));
     }
-
-    @DeleteMapping("/{id}")
+    
     @ResponseStatus(HttpStatus.NO_CONTENT)
+    @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id) {
-        seguroVidaService.deletar(id);
-
+        Optional<SeguroVida> seguro = seguroRepository.findById(id);
+        
+        if(seguro.isEmpty())
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        seguroRepository.deleteById(id);              
     }
-
 }
+

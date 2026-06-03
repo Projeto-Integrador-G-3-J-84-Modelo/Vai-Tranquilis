@@ -6,9 +6,13 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository
 public interface SeguroVidaRepository extends JpaRepository<SeguroVida, Long> {
     
-    // Busca parcial pelo nome do segurado
-    List<SeguroVida> findAllByNomeSeguradoContainingIgnoreCase(String nomeSegurado);
+	   // 1. Busca contratos filtrando por parte do NOME DO USUÁRIO
+    // eguroVida.usuario.nome
+    public List<SeguroVida> findAllByUsuarioNomeContainingIgnoreCase(String nomeUsuario);
+
+    // 2. Busca contratos filtrando por parte do NOME DO PLANO
+    // seguroVida.planoSeguro.nomePlano
+    public List<SeguroVida> findAllByPlanoSeguroNomePlanoContainingIgnoreCase(String nomePlano);
 }

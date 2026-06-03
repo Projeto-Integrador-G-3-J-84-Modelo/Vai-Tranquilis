@@ -2,16 +2,14 @@ package com.generation.projeto_integrador02.model;
 
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -31,16 +29,16 @@ public class Usuario {
 	@Size(max = 120, message = "O atributo e-mail deve conter no máximo 120 caracteres")
 	private String email;
 
-	// atributo foto
 	@Size(max = 255, message = "O atributo foto deve conter no máximo 255 caracteres")
 	private String foto;
 	
-	@NotNull
+	@NotNull(message = "O atributo Cobertura Maxima é obrigatório.")
+	@Digits(integer = 18 , message = "O atributo Idade deve ser maior que 18 deve ser um valor positivo.", fraction = 0)
 	private Integer idade; 
+	
+	@OneToMany(mappedBy = "usuario", cascade = CascadeType.REMOVE)
+	private List<SeguroVida> seguros;
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario", cascade = CascadeType.ALL)
-	@JsonIgnoreProperties(value = "usuario", allowSetters = true)
-	private List<SeguroVida> seguroVida;
 	
 	// Getters e SEtters
 	public Long getId() {
@@ -83,13 +81,14 @@ public class Usuario {
 		this.idade = idade;
 	}
 
-	public List<SeguroVida> getSeguroVida() {
-		return seguroVida;
+	public List<SeguroVida> getSeguros() {
+		return seguros;
 	}
 
-	public void setSeguroVida(List<SeguroVida> seguroVida) {
-		this.seguroVida = seguroVida;
+	public void setSeguros(List<SeguroVida> seguros) {
+		this.seguros = seguros;
 	}
-
+	
+	
 
 }

@@ -17,45 +17,31 @@ public class UsuarioService {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
-    /**
-     * Lista todos os usuários cadastrados no sistema.
-     */
-    public List<Usuario> listarTodos() {
-        return usuarioRepository.findAll();
+    public Optional<List<Usuario>> listarTodos() {
+        return Optional.of(usuarioRepository.findAll());
     }
 
-    /**
-     * Busca um usuário específico pelo ID.
-     */
     public Optional<Usuario> buscarPorId(Long id) {
         return usuarioRepository.findById(id);
     }
 
-    /**
-     * Cadastra um novo usuário
-     */
-    public Usuario criar(Usuario usuario) {
-        return usuarioRepository.save(usuario);
+    public Optional<Usuario> criar(Usuario usuario) {
+		return Optional.of(usuarioRepository.save(usuario));
+	}
+
+	public Optional<Usuario> atualizar(Usuario usuario) {
+
+		if (!usuarioRepository.findById(usuario.getId()).isPresent()) {
+			return Optional.empty();
+		}
+
+		Optional<Usuario> usuarioExistente = usuarioRepository.findById(usuario.getId());
+		
+		if (usuarioExistente.isPresent() && !usuarioExistente.get().getId().equals(usuario.getId())) {
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Usuário já existe!", null);
+		}
+
+		return Optional.of(usuarioRepository.save(usuario));
     }
 
-    /**
-     * Atualiza os dados de um usuário existente.
-     */
-    public Usuario atualizar(Usuario usuario) {
-        if (usuarioRepository.existsById(usuario.getId())) {
-            return usuarioRepository.save(usuario);
-        }
-        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado!");
-    }
-
-    /**
-     * Deleta um usuário pelo ID.
-     */
-    public void deletar(Long id) {
-        if (usuarioRepository.existsById(id)) {
-            usuarioRepository.deleteById(id);
-        } else {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado!");
-        }
-    }
 }
