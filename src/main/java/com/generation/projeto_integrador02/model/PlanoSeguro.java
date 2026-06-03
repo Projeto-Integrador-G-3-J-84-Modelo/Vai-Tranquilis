@@ -69,16 +69,6 @@ public class PlanoSeguro {
 		this.coberturaMaxima = coberturaMaxima;
 	}
 
-<<<<<<< HEAD
-    public PlanoSeguro getPlano() {
-        return plano;
-    }
-
-    public void setPlano(PlanoSeguro plano) {
-        this.plano = plano;
-    }
-
-=======
 	public List<SeguroVida> getSeguroVida() {
 		return seguroVida;
 	}
@@ -86,6 +76,4 @@ public class PlanoSeguro {
 	public void setSeguroVida(List<SeguroVida> seguroVida) {
 		this.seguroVida = seguroVida;
 	}
->>>>>>> f3db01923e2b6274e88ace75af45da12a6e78007
-
 }

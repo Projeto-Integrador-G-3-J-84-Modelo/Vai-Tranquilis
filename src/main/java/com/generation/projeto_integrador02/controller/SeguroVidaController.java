@@ -57,13 +57,7 @@ public class SeguroVidaController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable Long id) {
         seguroVidaService.deletar(id);
-    }
-
-    // ENDPOINT
-    @GetMapping("/elegibilidade/{id}")
-    public ResponseEntity<Map<String, String>> checarElegibilidade(@PathVariable Long id) {
-        String mensagem = seguroVidaService.verificarElegibilidade(id);
+  
         
-        return ResponseEntity.ok(Collections.singletonMap("mensagem", mensagem));
     }
 }
