@@ -34,7 +34,7 @@ public class SeguroVida {
 
     @ManyToOne
     @NotNull(message = "O usuário é obrigatório.")
-	@JsonIgnoreProperties("seguroVida")
+	@JsonIgnoreProperties("seguros")
     private Usuario usuario;
 	
 
