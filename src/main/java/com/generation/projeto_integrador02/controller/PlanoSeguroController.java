@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.generation.projeto_integrador02.model.PlanoSeguro;
+import com.generation.projeto_integrador02.model.SeguroVida;
 import com.generation.projeto_integrador02.repository.PlanoSeguroRepository;
 import com.generation.projeto_integrador02.service.PlanoSeguroService;
 import com.generation.projeto_integrador02.service.SeguroVidaService;
@@ -49,6 +50,11 @@ public class PlanoSeguroController {
         return planoRepository.findById(id)
             .map(resposta -> ResponseEntity.ok(resposta))
             .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+    }	
+	
+	@GetMapping("/descricao/{descricao}")
+    public ResponseEntity<List<PlanoSeguro>> buscarDescricao(@PathVariable String descricao){
+		    return ResponseEntity.ok(planoRepository.findAllByDescricaoContainingIgnoreCase(descricao));
     }
 	
 	@PostMapping("/cadastrar")
