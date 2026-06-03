@@ -62,20 +62,28 @@ O projeto foi desenvolvido utilizando Java e Spring Boot, seguindo boas prática
 
 <div align="center">
 
-| Funcionalidade               | Descrição                                              |
-| ---------------------------- | ------------------------------------------------------ |
-| ➕ Cadastrar Planos de Seguro | Permite adicionar novos planos ao sistema              |
-| 📝 Atualizar Planos          | Possibilita alterar informações dos planos cadastrados |
-| ❌ Excluir Planos             | Remove planos que não serão mais utilizados            |
-| 📋 Listar Planos             | Exibe todos os planos disponíveis                      |
-| 🔍 Buscar por Descrição            | Filtra planos de seguro com base na descrição informada
-| ➕ Cadastrar Seguros de Vida  | Registra novos segurados                               |
-| 📝 Atualizar Seguros         | Permite alterar informações do segurado                |
-| ❌ Excluir Seguros            | Remove registros do sistema                            |
-| 📋 Listar Seguros            | Consulta todos os seguros cadastrados                  |
-| 🔍 Buscar por ID             | Localiza registros específicos                         |
-| 🛡️ Verificar Elegibilidade  | Aplica a regra de negócio para contratação             |
-| 🌐 API REST                  | Comunicação padronizada entre sistemas                 |
+| Funcionalidade                        | Descrição                                               |
+| ------------------------------------- | ------------------------------------------------------- |
+| ➕ Cadastrar Planos de Seguro          | Permite adicionar novos planos ao sistema               |
+| 📝 Atualizar Planos                   | Possibilita alterar informações dos planos cadastrados  |
+| ❌ Excluir Planos                      | Remove planos que não serão mais utilizados             |
+| 📋 Listar Planos                      | Exibe todos os planos disponíveis                       |
+| 🔍 Buscar Plano por ID                | Localiza um plano específico pelo seu identificador     |
+| 🔍 Buscar Plano por Descrição         | Filtra planos de seguro com base na descrição informada |
+| ➕ Cadastrar Usuários                  | Registra novos usuários no sistema                      |
+| 📝 Atualizar Usuários                 | Permite alterar informações de um usuário               |
+| ❌ Excluir Usuários                    | Remove usuários do sistema                              |
+| 📋 Listar Usuários                    | Consulta todos os usuários cadastrados                  |
+| 🔍 Buscar Usuário por ID              | Localiza um usuário específico pelo seu identificador   |
+| 🔍 Buscar Usuário por E-mail          | Filtra usuários com base no e-mail informado            |
+| ➕ Cadastrar Seguros de Vida           | Registra novos contratos de seguro                      |
+| 📝 Atualizar Seguros                  | Permite alterar informações de um contrato              |
+| ❌ Excluir Seguros                     | Remove contratos do sistema                             |
+| 📋 Listar Seguros                     | Consulta todos os seguros cadastrados                   |
+| 🔍 Buscar Seguro por ID               | Localiza um contrato específico pelo seu identificador  |
+| 🔍 Buscar Seguro por Nome do Usuário  | Filtra contratos pelo nome do segurado                  |
+| 🔍 Buscar Seguro por Nome do Plano    | Filtra contratos pelo nome do plano associado           |
+| 🛡️ Verificar Elegibilidade           | Aplica a regra de negócio para contratação              |
 
 </div>
 
@@ -125,40 +133,82 @@ Esta funcionalidade foi implementada na camada Service, respeitando a separaçã
 
 ## Usuario
 
-* id
-* nome
-* email
-* foto
-* senha
+| Atributo | Tipo    | Descrição                        |
+|----------|---------|----------------------------------|
+| id       | Long    | Identificador único              |
+| nome     | String  | Nome completo (máx. 120 chars)   |
+| email    | String  | E-mail do usuário (máx. 120 chars) |
+| foto     | String  | URL da foto (máx. 255 chars)     |
+| idade    | Integer | Idade do usuário (mín. 18 anos)  |
 
 ## PlanoSeguro
 
-* id
-* nomePlano
-* descricao
-* coberturaMaxima
+| Atributo          | Tipo    | Descrição                           |
+|-------------------|---------|-------------------------------------|
+| id                | Long    | Identificador único                 |
+| nomePlano         | String  | Nome do plano (máx. 50 chars)       |
+| descricao         | String  | Descrição do plano (máx. 200 chars) |
+| indenizacaoMaxima | Double  | Valor máximo de indenização         |
 
 ## SeguroVida
 
-* id
-* nomeSegurado
-* idade
-* valorCobertura
-* valorMensalidade
+| Atributo        | Tipo      | Descrição                          |
+|-----------------|-----------|------------------------------------|
+| id              | Long      | Identificador único                |
+| valorMensalidade| Double    | Valor da mensalidade do contrato   |
+| dataContratacao | LocalDate | Data de contratação (padrão: hoje) |
+| planoSeguro     | PlanoSeguro | Plano associado ao contrato      |
+| usuario         | Usuario   | Usuário titular do contrato        |
 
 ---
 
 # 🔗 Relacionamentos
 
 ```text
-Usuario 1:N SeguroVida
-
-PlanoSeguro 1:N SeguroVida
+Usuario    1 ──────────── N    SeguroVida
+PlanoSeguro 1 ──────────── N    SeguroVida
 ```
 
-Um usuário pode possuir vários seguros cadastrados.
+Um usuário pode possuir vários contratos de seguro cadastrados.
 
-Um plano de seguro pode estar associado a diversos seguros de vida.
+Um plano de seguro pode estar associado a diversos contratos de seguro de vida.
+
+---
+
+# 🌐 Endpoints da API
+
+## Planos de Seguro — `/planos`
+
+| Método | Endpoint            | Descrição                         |
+|--------|---------------------|-----------------------------------|
+| GET    | `/planos`           | Lista todos os planos             |
+| GET    | `/planos/{id}`      | Busca plano por ID                |
+| POST   | `/planos/cadastrar` | Cadastra um novo plano            |
+| PUT    | `/planos/atualizar` | Atualiza um plano existente       |
+| DELETE | `/planos/{id}`      | Remove um plano                   |
+
+## Usuários — `/usuarios`
+
+| Método | Endpoint                    | Descrição                          |
+|--------|-----------------------------|------------------------------------|
+| GET    | `/usuarios`                 | Lista todos os usuários            |
+| GET    | `/usuarios/{id}`            | Busca usuário por ID               |
+| GET    | `/usuarios/email/{email}`   | Busca usuários por e-mail          |
+| POST   | `/usuarios/cadastrar`       | Cadastra um novo usuário           |
+| PUT    | `/usuarios/atualizar`       | Atualiza um usuário existente      |
+| DELETE | `/usuarios/{id}`            | Remove um usuário                  |
+
+## Seguros de Vida — `/seguros`
+
+| Método | Endpoint                        | Descrição                              |
+|--------|---------------------------------|----------------------------------------|
+| GET    | `/seguros`                      | Lista todos os seguros                 |
+| GET    | `/seguros/{id}`                 | Busca seguro por ID                    |
+| GET    | `/seguros/usuarios/{nome}`      | Busca seguros pelo nome do usuário     |
+| GET    | `/seguros/planos/{nome}`        | Busca seguros pelo nome do plano       |
+| POST   | `/seguros/cadastrar`            | Cadastra um novo contrato de seguro    |
+| PUT    | `/seguros/atualizar`            | Atualiza um contrato existente         |
+| DELETE | `/seguros/{id}`                 | Remove um contrato de seguro           |
 
 ---
 
@@ -168,8 +218,8 @@ Um plano de seguro pode estar associado a diversos seguros de vida.
 
 | Categoria          | Tecnologias                 |
 | ------------------ | --------------------------- |
-| 💻 Linguagem       | Java                        |
-| 🚀 Framework       | Spring Boot                 |
+| 💻 Linguagem       | Java 21                     |
+| 🚀 Framework       | Spring Boot 4.0.6           |
 | 🗄️ Persistência   | Spring Data JPA / Hibernate |
 | 🛢️ Banco de Dados | MySQL                       |
 | 🔌 API             | REST API                    |
@@ -201,15 +251,31 @@ Um plano de seguro pode estar associado a diversos seguros de vida.
 
 ```text
 src
- ├── controller
- ├── service
- ├── repository
- └── model
+ └── main
+      └── java
+           └── com.generation.projeto_integrador02
+                ├── controller
+                │    ├── PlanoSeguroController.java
+                │    ├── SeguroVidaController.java
+                │    └── UsuarioController.java
+                ├── model
+                │    ├── PlanoSeguro.java
+                │    ├── SeguroVida.java
+                │    └── Usuario.java
+                ├── repository
+                │    ├── PlanoSeguroRepository.java
+                │    ├── SeguroVidaRepository.java
+                │    └── UsuarioRepository.java
+                ├── service
+                │    ├── PlanoSeguroService.java
+                │    ├── SeguroVidaService.java
+                │    └── UsuarioService.java
+                └── ProjetoIntegrador02Application.java
 
 evidencias
  ├── plano-seguro
  ├── seguro-vida
- ├── service
+ ├── usuario
  └── relatorio-testes.md
 
 docs
@@ -234,27 +300,21 @@ cd Vai-Tranquilis
 
 ## 3️⃣ Configure o banco de dados
 
-Edite o arquivo:
+Edite o arquivo `src/main/resources/application.properties`:
 
 ```properties
-application.properties
+spring.datasource.url=jdbc:mysql://localhost/projeto_integrador02?createDatabaseIfNotExist=true&serverTimezone=America/Sao_Paulo&useSSl=false
+spring.datasource.username=SEU_USUARIO
+spring.datasource.password=SUA_SENHA
 ```
-
-Configure:
-
-```properties
-spring.datasource.url=
-spring.datasource.username=
-spring.datasource.password=
-```
-
----
 
 ## 4️⃣ Execute a aplicação
 
 ```bash
 ./mvnw spring-boot:run
 ```
+
+A API estará disponível em `http://localhost:8080`.
 
 ---
 
