@@ -4,12 +4,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-<<<<<<< HEAD
-import jakarta.persistence.ManyToOne;
-=======
-import jakarta.persistence.OneToMany;
->>>>>>> f3db01923e2b6274e88ace75af45da12a6e78007
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -22,20 +18,20 @@ public class PlanoSeguro {
 	private Long id;
 
 	@NotBlank
-	@Size(max = 50, message = "O atributo nome do plano deve conter no máximo 50 caracteres")
+	@Size(max = 50, message = "O atributo Nome do Plano deve conter no máximo 50 caracteres")
 	private String nomePlano;
 
 	@NotBlank
-	@Size(max = 200, message = "O atributo descrição deve conter no máximo 200 caracteres")
+	@Size(max = 200, message = "O atributo Descrição deve conter no máximo 200 caracteres")
 	private String descricao;
 
-	@NotNull
-	private Double coberturaMaxima;
+	@NotNull(message = "O atributo Indenização Maxima é obrigatório.")
+	@DecimalMin(value = "0.01", message = "O atributo Indenização Maxima deve ser um valor positivo.")
+	private Double indenizacaoMaxima;
 	
-	// relacionamento entre as entidades seguroVida e planoSeguro
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "planoSeguro", cascade = CascadeType.REMOVE)
-	@JsonIgnoreProperties(value = "planoSeguro", allowSetters = true)
-	private List<SeguroVida> seguroVida;
+	/*@ManyToOne
+	@JsonIgnoreProperties("planoSeguro")
+	private SeguroVida seguroVida;*/
 	
 	public Long getId() {
 		return id;
@@ -61,19 +57,12 @@ public class PlanoSeguro {
 		this.descricao = descricao;
 	}
 
-	public Double getCoberturaMaxima() {
-		return coberturaMaxima;
+	public Double getIndenizacaoMaxima() {
+		return indenizacaoMaxima;
 	}
 
-	public void setCoberturaMaxima(Double coberturaMaxima) {
-		this.coberturaMaxima = coberturaMaxima;
+	public void setIndenizacaoMaxima(Double indenizacaoMaxima) {
+		this.indenizacaoMaxima = indenizacaoMaxima;
 	}
 
-	public List<SeguroVida> getSeguroVida() {
-		return seguroVida;
-	}
-
-	public void setSeguroVida(List<SeguroVida> seguroVida) {
-		this.seguroVida = seguroVida;
-	}
 }

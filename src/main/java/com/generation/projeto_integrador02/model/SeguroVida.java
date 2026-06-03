@@ -1,16 +1,19 @@
 package com.generation.projeto_integrador02.model;
 
+import java.time.LocalDate;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+
 
 @Entity
 @Table(name = "tb_seguroVida")
@@ -19,25 +22,21 @@ public class SeguroVida {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@NotBlank
-	@Size(max = 120, message = "O atributo nome do seguro deve conter no máximo 120 caracteres")
-	private String nomeSegurado;
-
-	@NotNull
-	private Integer valorCobertura;
-
-	@NotNull
-	private Integer valorMensalidade;
-
-	// relacionamento entre as entidades seguroVida e planoSeguro
-	@ManyToOne
-	@JsonIgnoreProperties("seguroVida")
-	private PlanoSeguro planoSeguro;
+	private Double valorMensalidade; 
 	
-	//relacionamento entidades seguroVida e usuario
-	@ManyToOne
+	@DateTimeFormat(pattern = "dd-MM-yyyy")
+	private LocalDate dataContratacao = LocalDate.now();
+
+    @ManyToOne
+    @NotNull(message = "O plano de seguro é obrigatório.")
 	@JsonIgnoreProperties("seguroVida")
-	private Usuario usuario;
+    private PlanoSeguro planoSeguro;
+
+    @ManyToOne
+    @NotNull(message = "O usuário é obrigatório.")
+	@JsonIgnoreProperties("seguroVida")
+    private Usuario usuario;
+	
 
 	public Long getId() {
 		return id;
@@ -47,28 +46,20 @@ public class SeguroVida {
 		this.id = id;
 	}
 
-	public String getNomeSegurado() {
-		return nomeSegurado;
-	}
-
-	public void setNomeSegurado(String nomeSegurado) {
-		this.nomeSegurado = nomeSegurado;
-	
-	}
-	public Integer getValorCobertura() {
-		return valorCobertura;
-	}
-
-	public void setValorCobertura(Integer valorCobertura) {
-		this.valorCobertura = valorCobertura;
-	}
-
-	public Integer getValorMensalidade() {
+	public Double getValorMensalidade() {
 		return valorMensalidade;
 	}
 
-	public void setValorMensalidade(Integer valorMensalidade) {
+	public void setValorMensalidade(Double valorMensalidade) {
 		this.valorMensalidade = valorMensalidade;
+	}
+
+	public LocalDate getDataContratacao() {
+		return dataContratacao;
+	}
+
+	public void setDataContratacao(LocalDate dataContratacao) {
+		this.dataContratacao = dataContratacao;
 	}
 
 	public PlanoSeguro getPlanoSeguro() {
@@ -86,5 +77,6 @@ public class SeguroVida {
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
+
 
 }

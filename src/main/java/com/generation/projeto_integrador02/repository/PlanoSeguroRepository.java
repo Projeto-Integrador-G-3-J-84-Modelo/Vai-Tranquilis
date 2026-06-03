@@ -9,6 +9,5 @@ import java.util.List;
 @Repository
 public interface PlanoSeguroRepository extends JpaRepository<PlanoSeguro, Long> {
     
-    // Busca parcial ignorando maiúsculas/minúsculas pela descrição do plano
-    List<PlanoSeguro> findAllByDescricaoContainingIgnoreCase(String descricao);
+    public List<PlanoSeguro> findAllByDescricaoContainingIgnoreCase(String descricao);
 }
