@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.generation.projeto_integrador02.model.PlanoSeguro;
 import com.generation.projeto_integrador02.service.PlanoSeguroService;
-import com.generation.projeto_integrador02.service.SeguroVidaService;
 
 import jakarta.validation.Valid;
 
@@ -30,8 +29,6 @@ public class PlanoSeguroController {
 	@Autowired
 	private PlanoSeguroService planoService;
 
-	@Autowired
-	private SeguroVidaService seguroVidaService;
 
 	@GetMapping
     public ResponseEntity<List<PlanoSeguro>> listarTodos(){
