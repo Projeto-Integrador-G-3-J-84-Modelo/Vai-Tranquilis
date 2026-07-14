@@ -151,6 +151,29 @@ collection:
             send: true
             store: true
           rebuildPath: true
+      - url: http://localhost:8080/planos/descricao/funeral
+        name: Buscar Por Descrição
+        meta:
+          id: req_f7ffed141c434a4c85977c617be306b7
+          created: 1780498941951
+          modified: 1780498963594
+          isPrivate: false
+          description: ""
+          sortKey: -1780456618363.4375
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/12.6.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
   - name: Seguro
     meta:
       id: fld_64620230f26f4b678527490ac81ef6af

@@ -29,9 +29,6 @@ public class PlanoSeguro {
 	@DecimalMin(value = "0.01", message = "O atributo Indenização Maxima deve ser um valor positivo.")
 	private Double indenizacaoMaxima;
 	
-	/*@ManyToOne
-	@JsonIgnoreProperties("planoSeguro")
-	private SeguroVida seguroVida;*/
 	
 	public Long getId() {
 		return id;

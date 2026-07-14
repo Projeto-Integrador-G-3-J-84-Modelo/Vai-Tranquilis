@@ -4,12 +4,13 @@ import java.util.List;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.Digits;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -32,11 +33,11 @@ public class Usuario {
 	@Size(max = 255, message = "O atributo foto deve conter no máximo 255 caracteres")
 	private String foto;
 	
-	@NotNull(message = "O atributo Cobertura Maxima é obrigatório.")
-	@Digits(integer = 18 , message = "O atributo Idade deve ser maior que 18 deve ser um valor positivo.", fraction = 0)
+	@NotNull(message = "O atributo Idade é obrigatório.")
+	@Min(value = 0 , message = "O atributo Idade deve ser um valor positivo.")
 	private Integer idade; 
 	
-	@OneToMany(mappedBy = "usuario", cascade = CascadeType.REMOVE)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario", cascade = CascadeType.REMOVE)
 	private List<SeguroVida> seguros;
 
 	
